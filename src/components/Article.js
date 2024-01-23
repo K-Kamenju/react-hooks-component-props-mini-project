@@ -1,45 +1,40 @@
 import React from 'react'
 
-function Article({
-    title,
-    date = "January 1, 1970",
-    minutes,
-    preview
-}) {
+function Article({title, date = "January 1, 1970", preview, minutes}) {
 
-    const calculateEmojis = (minutes) => {
-        const emojis = [];
+  const countEmojis = (minutes) => {
+    const emojis = []
 
-        if (minutes < 30) {
-            const coffeeCups = Math.ceil(minutes / 5);
-            for (let i = 0; i < coffeeCups; i++) {
-            emojis.push('☕️');
-            }
-        } else {
-            const bentoBoxes = Math.ceil(minutes / 10);
-            for (let i = 0; i < bentoBoxes; i++) {
-            emojis.push('🍱');
-            }
-        }
+    if (minutes < 30) {
+      const coffeecups = Math.ceil(minutes/5)
+      for (let i = 0; i <coffeecups; i++){
+        emojis.push('☕️')
+      }
+    } else {
+      const bentoBoxes = Math.ceil(minutes/5)
+      for(let i =0; i < bentoBoxes; i++) {
+        emojis.push('🍱')
+      }
+    }
+  }
 
-        return emojis;
-        };
 
-    return (
+  return (
     <article>
         <h3>{title}</h3>
         <div id='small'>
             <small>{date}</small>
             <small>
-                {calculateEmojis(minutes).map((emoji, index) => (
-                <span key={index}>{emoji}</span>
-                ))}
-                {` ${minutes} min read`}
+              {
+                countEmojis(minutes).map((emoji, index) => {
+                  return <span key={index}>{emoji}</span>
+                })
+              }
             </small>
         </div>
         <p>{preview}</p>
     </article>
-    )
+  )
 }
 
-export default Article;
+export default Article
